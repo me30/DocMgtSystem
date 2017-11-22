@@ -12,7 +12,7 @@ Application demo for document management system where user can upload document a
 # Details
 SpringBoot, SpringData, Admin LTE Bootstrap themes, Javascript , Jquery, Jsp, MySql, Spring Security
 
-##Before run 
+# Before run 
 - 1)"application.properties" -> update sql and mail credential 
 - 2)Run file "WebApplication.java" - its create db schema and db automatically
 - 3)execute ../DB/data.sql statment.
