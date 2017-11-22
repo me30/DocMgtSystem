@@ -79,6 +79,9 @@ $(document).ready(function() {
 	        success: function(dataSet) {
 	        	timerAjaxFun();
 	        	mytimeout = setInterval(function(){timerAjaxFun()}, 8000);
+	        },error: function(dataSet){
+	        	timerAjaxFun();
+	        	mytimeout = setInterval(function(){timerAjaxFun()}, 8000);
 	        }
 	    });
     }
@@ -103,6 +106,9 @@ $(document).ready(function() {
 	        timeout: 30000,
 	        url: "/a/docDownlaod?id=" + id ,
 	        success: function(dataSet) {
+	        	timerAjaxFun();
+	        	mytimeout = setInterval(function(){timerAjaxFun()}, 8000);
+	        },error: function(dataSet){
 	        	timerAjaxFun();
 	        	mytimeout = setInterval(function(){timerAjaxFun()}, 8000);
 	        }

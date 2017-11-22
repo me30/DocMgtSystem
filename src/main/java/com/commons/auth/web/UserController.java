@@ -1,6 +1,7 @@
 package com.commons.auth.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -59,7 +60,7 @@ public class UserController {
 		return "redirect:/registration";
 	}
 
-	@RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model, String error, String logout) {
 		if (error != null)
 			model.addAttribute("error", "Your username and password is invalid.");
@@ -70,24 +71,28 @@ public class UserController {
 		return "login";
 	}
 
-	@RequestMapping(value = {"/welcome"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
 	public String welcome(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails userDetails = userDetailsService.loadUserByUsername(auth.getName());
+		System.out.println(auth);
 		String page = "login";
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			UserDetails userDetails = userDetailsService.loadUserByUsername(auth.getName());
 
-		for (GrantedAuthority authority : userDetails.getAuthorities()) {
-			System.out.println(""+authority.getAuthority());
-			if (authority.getAuthority().equals(AppConstant.ADMIN_NAME)) {
-				System.out.println(""+authority.getAuthority() + "1");
-				page="redirect:a/dashboard";
-				break;
-			}else if(authority.getAuthority().equals(AppConstant.DOCUMENT_USER_NAME)) {
-				System.out.println(""+authority.getAuthority() + "2");
-				page="redirect:d/dashboard";
-				break;
+			for (GrantedAuthority authority : userDetails.getAuthorities()) {
+				System.out.println(""+authority.getAuthority());
+				if (authority.getAuthority().equals(AppConstant.ADMIN_NAME)) {
+					System.out.println(""+authority.getAuthority() + "1");
+					page="redirect:a/dashboard";
+					break;
+				}else if(authority.getAuthority().equals(AppConstant.DOCUMENT_USER_NAME)) {
+					System.out.println(""+authority.getAuthority() + "2");
+					page="redirect:d/dashboard";
+					break;
+				}
 			}
 		}
+		
 
 		return page;
 	}

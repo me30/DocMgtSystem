@@ -64,18 +64,24 @@ public class AdminController extends SimpleEmailController {
 
 	@RequestMapping(value="/approveDoc", method = RequestMethod.POST)
 	public @ResponseBody boolean approveDoc(HttpServletRequest request,HttpServletResponse rep, @RequestParam("id") String id) throws Exception {
-		System.out.println("Approve"+id);
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails userDetails = userDetailsService.loadUserByUsername(auth.getName());
-		User user = userService.findByUsername(userDetails.getUsername());
+		try{
+			System.out.println("Approve"+id);
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetails = userDetailsService.loadUserByUsername(auth.getName());
+			User user = userService.findByUsername(userDetails.getUsername());
 
-		DocumentDetails documentDetails = documentService.findById(Long.parseLong(id));
-		if(documentService.approveDoc(Long.parseLong(id), user)){
-			sendEmail(documentDetails.getCreatedBy(), documentDetails.getTitle() + ","+AppConstant.EMAIL_SUBJECT_APPROVE_DOC+user.getUsername(), user.getUsername() + AppConstant.EMAIL_TEXT_APPROVE_DOC + documentDetails.getTitle() +"\"");
-			return true;
-		}else{
-			return false;
+			DocumentDetails documentDetails = documentService.findById(Long.parseLong(id));
+			if(documentService.approveDoc(Long.parseLong(id), user)){
+				sendEmail(documentDetails.getCreatedBy(), documentDetails.getTitle() + ","+AppConstant.EMAIL_SUBJECT_APPROVE_DOC+user.getUsername(), user.getUsername() + AppConstant.EMAIL_TEXT_APPROVE_DOC + documentDetails.getTitle() +"\"");
+				return true;
+			}else{
+				return false;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+		return true;
+		
 	}
 
 	@RequestMapping(value="/rejectedDoc", method = RequestMethod.POST)
