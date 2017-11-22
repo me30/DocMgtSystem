@@ -59,7 +59,7 @@ public class UserController {
 		return "redirect:/registration";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
 	public String login(Model model, String error, String logout) {
 		if (error != null)
 			model.addAttribute("error", "Your username and password is invalid.");
@@ -70,7 +70,7 @@ public class UserController {
 		return "login";
 	}
 
-	@RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/welcome"}, method = RequestMethod.GET)
 	public String welcome(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetails = userDetailsService.loadUserByUsername(auth.getName());
