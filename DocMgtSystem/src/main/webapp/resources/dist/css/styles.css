@@ -1,0 +1,9 @@
+.user-name{
+	padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 20px;
+    color:#fff;
+    text-transform: capitalize;
+}
+table.dataTable thead th, table.dataTable thead td, table.dataTable.no-footer{border-bottom: 1px solid #b1afaf!important;}
+.dataTables_filter input{border:#aaa 1px solid;}
