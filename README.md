@@ -10,7 +10,7 @@ Application demo for document management system where user can upload document a
 - Mysql
 
 # Details
-SpringBoot, SpringData, Admin LTE Bootstrap themes, Javascript , Jquery, Jsp, MySql, Spring Security
+SpringBoot, SpringData, Admin LTE Bootstrap themes, Java, Javascript , Jquery, Jsp, MySql, Spring Security
 
 # Before run 
 - 1)"application.properties" -> update sql and mail credential 
