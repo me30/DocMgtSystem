@@ -2,15 +2,16 @@
 Application demo for document management system where user can upload document and admin approve or reject document. 
 
 # Requirement
+- JAVA 8
+- Tomcat 8
 - Spring Security
 - Spring Boot
 - Spring Data JPA
 - Maven
 - JSP
 - Mysql
-
-# Details
-SpringBoot, SpringData, Admin LTE Bootstrap themes, Java, Javascript , Jquery, Jsp, MySql, Spring Security
+- Admin LTE Bootstrap themes
+- Jquery
 
 # Before run 
 - 1)"application.properties" -> update sql and mail credential 
